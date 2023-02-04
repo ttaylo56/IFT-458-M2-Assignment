@@ -49,7 +49,24 @@ const server = http.createServer((req, res) => {
     loans += `Grand Total Loan Amount: $${totalLoanAmount.toFixed(2)}`;
     res.end(loans);}})
 
-    const port = process.env.PORT || 3000;
-server.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+    const createServer = http.createServer((req, res) => {
+        const parsedUrl = url.parse(req.url, true);
+      
+        if (parsedUrl.pathname === "/loans") {
+          let totalLoanAmount = 0;
+          let loans = "<html><head><style>table, th, td {border: 1px solid black;}</style></head><body><table><tr><th>Loan Id</th><th>Customer Name</th><th>Phone Number</th><th>Address</th><th>Loan Amount</th><th>Interest</th><th>Loan Term (years)</th><th>Loan Type</th><th>Description</th><th>Calculated Loan Amount</th></tr>";
+          for (const loan of loanArray) {
+            loans += "<tr><td>" + loan.id + "</td><td>" + loan.customerName + "</td><td>" + loan.phoneNumber + "</td><td>" + loan.address + "</td><td>$" + loan.loanAmount + "</td><td>" + loan.interest + "</td><td>" + loan.loanTermYears + "</td><td>" + loan.loanType + "</td><td>" + loan.description + "</td><td>$" + loan.calculatedLoanAmount().toFixed(2) + "</td></tr>";
+            totalLoanAmount += loan.calculatedLoanAmount();
+          }
+          loans += "</table><br><b>Grand Total Loan Amount: $" + totalLoanAmount.toFixed(2) + "</b></body></html>";
+          res.writeHead(200, { 'Content-Type': 'text/html' });
+          res.end(loans);
+        }
+      });
+      
+      const port = process.env.PORT || 3000;
+      server.listen(port, () => {
+        console.log(`Server is running on port ${port}`);
+      });
+      
