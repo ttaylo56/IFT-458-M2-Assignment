@@ -1,42 +1,107 @@
-const loanArray = [];
-
-// JavaScript Object for loan
-const Loan = function(id, customerName, phoneNumber, address, loanAmount, interest, loanTermYears, loanType, description) {
-  this.id = id;
-  this.customerName = customerName;
-  this.phoneNumber = phoneNumber;
-  this.address = address;
-  this.loanAmount = loanAmount;
-  this.interest = interest;
-  this.loanTermYears = loanTermYears;
-  this.loanType = loanType;
-  this.description = description;
-  this.calculatedLoanAmount = function() {
+const loan = {
+  Id: 0,
+  customerName: "",
+  phoneNumber: "",
+  address: "",
+  loanAmount: 0,
+  interest: 0,
+  loanTermYears: 0,
+  loanType: "",
+  description: "",
+  calculatedLoanAmount: function() {
     return this.loanAmount * (1 + this.interest * this.loanTermYears);
-  };
+  }
 };
 
-// Adding five instances of loan objects to the loanArray
-loanArray.push(new Loan(1, "John Doe", "555-555-1212", "123 Main St", 1000, 0.06, 2, "Personal", "Car Loan"));
-loanArray.push(new Loan(2, "Jane Doe", "555-555-1213", "124 Main St", 5000, 0.05, 5, "Home", "Home Loan"));
-loanArray.push(new Loan(3, "Jim Smith", "555-555-1214", "125 Main St", 10000, 0.04, 3, "Business", "Business Loan"));
-loanArray.push(new Loan(4, "Sarah Johnson", "555-555-1215", "126 Main St", 8000, 0.07, 4, "Student", "Student Loan"));
-loanArray.push(new Loan(5, "Tom Davis", "555-555-1216", "127 Main St", 6000, 0.08, 1, "Auto", "Auto Loan"));
 
-// List all the array elements with the grand total loan amount
-let totalLoanAmount = 0;
-for (const loan of loanArray) {
-  console.log(`Loan Id: ${loan.id}`);
-  console.log(`Customer Name: ${loan.customerName}`);
-  console.log(`Phone Number: ${loan.phoneNumber}`);
-  console.log(`Address: ${loan.address}`);
-  console.log(`Loan Amount: $${loan.loanAmount}`);
-  console.log(`Interest: ${loan.interest}`);
-  console.log(`Loan Term (years): ${loan.loanTermYears}`);
-  console.log(`Loan Type: ${loan.loanType}`);
-  console.log(`Description: ${loan.description}`);
-  console.log(`Calculated Loan Amount: $${loan.calculatedLoanAmount().toFixed(2)}`);
-  console.log("");
-  totalLoanAmount += loan.calculatedLoanAmount();
+let loans = [
+  {
+    Id: 0,
+    customerName: "John Doe",
+    phoneNumber: "555-555-5555",
+    address: "123 Main St, Anytown, CA 12345",
+    loanAmount: 10000,
+    interest: 0.05,
+    loanTermYears: 5,
+    loanType: "Personal",
+    description: "Loan for home improvement project",
+    calculatedLoanAmount: function() {
+      return this.loanAmount * (1 + this.interest * this.loanTermYears);
+    }
+  },
+  {
+    Id: 1,
+    customerName: "Jane Smith",
+    phoneNumber: "555-555-5556",
+    address: "456 Elm St, Anytown, CA 12345",
+    loanAmount: 20000,
+    interest: 0.06,
+    loanTermYears: 7,
+    loanType: "Business",
+    description: "Loan for small business expansion",
+    calculatedLoanAmount: function() {
+      return this.loanAmount * (1 + this.interest * this.loanTermYears);
+    }
+  },
+  {
+    Id: 2,
+    customerName: "Bob Johnson",
+    phoneNumber: "555-555-5557",
+    address: "789 Oak St, Anytown, CA 12345",
+    loanAmount: 15000,
+    interest: 0.05,
+    loanTermYears: 4,
+    loanType: "Personal",
+    description: "Loan for car purchase",
+    calculatedLoanAmount: function() {
+      return this.loanAmount * (1 + this.interest * this.loanTermYears);
+    }
+  },
+  {
+    Id: 3,
+    customerName: "Alice Lee",
+    phoneNumber: "555-555-5558",
+    address: "246 Pine St, Anytown, CA 12345",
+    loanAmount: 12000,
+    interest: 0.04,
+    loanTermYears: 3,
+    loanType: "Business",
+    description: "Loan for equipment purchase",
+    calculatedLoanAmount: function() {
+      return this.loanAmount * (1 + this.interest * this.loanTermYears);
+    }
+  },
+  {
+    Id: 4,
+    customerName: "Tom Davis",
+    phoneNumber: "555-555-5559",
+    address: "369 Maple St, Anytown, CA 12345",
+    loanAmount: 9000,
+    interest: 0.06,
+    loanTermYears: 5,
+    loanType: "Personal",
+    description: "Loan for home renovation",
+    calculatedLoanAmount: function() {
+      return this.loanAmount * (1 + this.interest * this.loanTermYears);
+    }
+  }
+]
+
+let grandTotal = 0;
+for (let i = 0; i < loans.length; i++) {
+  console.log(`Loan #${loans[i].Id}`);
+  console.log(`Customer Name: ${loans[i].customerName}`);
+  console.log(`Phone Number: ${loans[i].phoneNumber}`);
+  console.log(`Address: ${loans[i].address}`);
+  console.log(`Loan Amount: ${loans[i].loanAmount}`);
+  console.log(`Interest: ${loans[i].interest}`);
+  console.log(`Loan Term (Years): ${loans[i].loanTermYears}`);
+  console.log(`Loan Type: ${loans[i].loanType}`);
+  console.log(`Description: ${loans[i].description}`);
+  console.log(`Calculated Loan Amount: ${loans[i].calculatedLoanAmount()}`);
+  console.log('');
+
+  grandTotal += loans[i].calculatedLoanAmount();
 }
-console.log(`Grand Total Loan Amount: $${totalLoanAmount.toFixed(2)}`);
+
+console.log(`Grand Total Loan Amount: ${grandTotal}`);
