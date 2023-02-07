@@ -89,7 +89,7 @@ let loans = [
 
 let grandTotal = 0;
 for (let i = 0; i < loans.length; i++) {
-  console.log(`Loan #${loans[i].Id}`);
+  console.log(`Loan ID: ${loans[i].Id}`);
   console.log(`Customer Name: ${loans[i].customerName}`);
   console.log(`Phone Number: ${loans[i].phoneNumber}`);
   console.log(`Address: ${loans[i].address}`);
